@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+:root {
+  --bone: #f5f5f1;
+  --graphite: #202326;
+  --ink: #16181b;
+  --steel: #656b71;
+  --brand: #e6323c;
+  --paper: #ffffff;
+}
+
+@layer components {
+  .tone-light {
+    --fg: var(--graphite);
+    --fg-muted: #555b61;
+    --line: rgb(32 35 38 / 0.14);
+    --card: var(--paper);
+    --card-line: rgb(32 35 38 / 0.1);
+    background-color: var(--bone);
+    color: var(--fg);
+  }
+
+  .tone-dark {
+    --fg: var(--bone);
+    --fg-muted: rgb(245 245 241 / 0.66);
+    --line: rgb(245 245 241 / 0.14);
+    --card: var(--ink);
+    --card-line: rgb(245 245 241 / 0.1);
+    background-color: var(--graphite);
+    color: var(--fg);
+  }
+}
+
+@theme inline {
+  --color-bone: var(--bone);
+  --color-graphite: var(--graphite);
+  --color-ink: var(--ink);
+  --color-steel: var(--steel);
+  --color-brand: var(--brand);
+  --color-paper: var(--paper);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-card-line: var(--card-line);
+
+  --font-heading: var(--font-heading-face);
+  --font-body: var(--font-body-face);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bone);
+}
+
+body {
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--bone);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.matte-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+
+.diagonal-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.5vw), 0 100%);
+}
+
+.diagonal-top {
+  clip-path: polygon(0 3.5vw, 100% 0, 100% 100%, 0 100%);
+}
+
+.diagonal-frame {
+  clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.img-shimmer {
+  background: linear-gradient(90deg, var(--card) 0%, color-mix(in srgb, var(--card), var(--fg) 6%) 40%, var(--card) 80%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.typing-dot {
+  animation: typing 1s ease-in-out infinite;
+}
+
+@keyframes typing {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .typing-dot,
+  .img-shimmer {
+    animation: none;
+  }
+}
